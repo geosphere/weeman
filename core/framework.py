@@ -6,6 +6,9 @@
 # See 'LICENSE'  for copying
 #
 
+# Python3 print
+from __future__ import print_function
+
 import glob
 import os
 import sys
@@ -28,7 +31,7 @@ class framework(object):
         print("\trun    - load module.")
         print("\tlist   - list modules.")
         print("\tinfo   - get info for about module.")
-        print("\tback   - retrun to weeman shell.")
+        print("\tback   - return to weeman shell.")
         print("\thelp   - we all know (:.\033[00m")
 
     def print_startup(self, modules_count):
@@ -52,11 +55,11 @@ class framework(object):
             args = raw_input("framework >>> ") or "help"
             args = args.split()
             if args[0] == "list":
-                print("-----------\n"
-                      "| modules |\n"
-                      "-----------"
-                      "-----------------------------------\n"
-                     "\t| ID  | Name | Version | Information |")
+                print("\t-----------\n"
+                      "\t| modules |\n"
+                      "\t-----------\n"
+                      "\t-----------------------------------\n"
+                      "\t| ID  | Name | Version | Information |")
                 for mod in self.o_modules:
                     try:
                         self.c_modules += 1
@@ -64,12 +67,13 @@ class framework(object):
                     except ImportError:
                         print("\t>> %s - [ERROR ON LOAD]" %(mod))
                     else:
-                        sys.stdout.write("\t")
-                        _ = len(m.MODULE_DE) + len(m.MODULE_VERSION) +30
+                        print("\t", end="")
+                        line = "\t| %d]. %s (%s) - %s\t|" %(self.c_modules, 
+                            mod, m.MODULE_VERSION, m.MODULE_DE)
+                        _ = len(line)
                         print("-" * _)
-                        print("\t| %d]. %s (%s) - %s\t|" %(self.c_modules, 
-                            mod, m.MODULE_VERSION, m.MODULE_DE))
-                sys.stdout.write("\t")
+                        print(line)
+                print("\t", end="")
                 print("-" * _)
             elif args[0] == "run":
                 try:
