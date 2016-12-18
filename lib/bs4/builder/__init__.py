@@ -1,9 +1,13 @@
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
 from collections import defaultdict
 import itertools
 import sys
-from lib.bs4.element import (
+from bs4.element import (
     CharsetMetaAttributeValue,
     ContentMetaAttributeValue,
+    HTMLAwareEntitySubstitution,
     whitespace_re
     )
 
@@ -227,7 +231,7 @@ class HTMLTreeBuilder(TreeBuilder):
     Such as which tags are empty-element tags.
     """
 
-    preserve_whitespace_tags = set(['pre', 'textarea'])
+    preserve_whitespace_tags = HTMLAwareEntitySubstitution.preserve_whitespace_tags
     empty_element_tags = set(['br' , 'hr', 'input', 'img', 'meta',
                               'spacer', 'link', 'frame', 'base'])
 
@@ -291,7 +295,7 @@ class HTMLTreeBuilder(TreeBuilder):
 def register_treebuilders_from(module):
     """Copy TreeBuilders from the given module into this module."""
     # I'm fairly sure this is not the best way to do this.
-    this_module = sys.modules['lib.bs4.builder']
+    this_module = sys.modules['bs4.builder']
     for name in module.__all__:
         obj = getattr(module, name)
 

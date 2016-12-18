@@ -1,5 +1,8 @@
 """Use the HTMLParser library to parse HTML files that aren't too bad."""
 
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
 __all__ = [
     'HTMLParserTreeBuilder',
     ]
@@ -30,16 +33,16 @@ CONSTRUCTOR_STRICT_IS_DEPRECATED = major == 3 and minor == 3
 CONSTRUCTOR_TAKES_CONVERT_CHARREFS = major == 3 and minor >= 4
 
 
-from lib.bs4.element import (
+from bs4.element import (
     CData,
     Comment,
     Declaration,
     Doctype,
     ProcessingInstruction,
     )
-from lib.bs4.dammit import EntitySubstitution, UnicodeDammit
+from bs4.dammit import EntitySubstitution, UnicodeDammit
 
-from lib.bs4.builder import (
+from bs4.builder import (
     HTML,
     HTMLTreeBuilder,
     STRICT,
